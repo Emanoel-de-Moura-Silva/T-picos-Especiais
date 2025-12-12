@@ -1,1 +1,2 @@
-Sent 20000 messages in 75s
+[2025-12-12 00:20:22,478] WARN [Producer clientId=console-producer] The metadata response from the cluster reported a recoverable issue with correlation id 1 : {perf-test=UNKNOWN_TOPIC_OR_PARTITION} (org.apache.kafka.clients.NetworkClient)
+Sent 20000 messages in 87s

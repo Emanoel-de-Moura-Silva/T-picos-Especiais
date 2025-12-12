@@ -3,6 +3,8 @@ chmod +x scripts/kafka_producer_custom.sh
 
 chmod +x scripts/producer_redpanda_rpk.sh
 
+chmod +x scripts/producer_pulsar_rpk.sh
+
 
 # Ativar o Ambiente Virtual
 -- source venv/bin/activate
@@ -16,5 +18,10 @@ docker exec -it broker bash -c "/opt/project/scripts/kafka_producer_custom.sh"
 docker compose -f docker-compose-redpanda.yml up -d
 
 docker exec -it redpanda bash -c "/opt/project/scripts/producer_redpanda_rpk.sh"
+
+docker compose -f docker-compose-pulsar.yml up -d
+
+docker exec -it pulsar sh -c "/opt/project/scripts/producer_pulsar_rpk.sh"
+
 
 
