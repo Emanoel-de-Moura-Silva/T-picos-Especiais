@@ -1,0 +1,20 @@
+-- Dar permissão de execução
+chmod +x scripts/kafka_producer_custom.sh
+
+chmod +x scripts/producer_redpanda_rpk.sh
+
+
+# Ativar o Ambiente Virtual
+-- source venv/bin/activate
+
+# Rodar o Script
+
+docker compose -f docker-compose.yml up -d
+
+docker exec -it broker bash -c "/opt/project/scripts/kafka_producer_custom.sh"
+
+docker compose -f docker-compose-redpanda.yml up -d
+
+docker exec -it redpanda bash -c "/opt/project/scripts/producer_redpanda_rpk.sh"
+
+
