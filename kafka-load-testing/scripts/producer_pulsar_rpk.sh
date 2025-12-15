@@ -1,29 +1,20 @@
 #!/bin/bash
 
-# Broker e topic
-BROKER_URL="pulsar://localhost:6650"
-TOPIC="perf-test"
-MESSAGE_FILE="/opt/project/data/message.json"
+PULSAR_PERF="/pulsar/bin/pulsar-perf"
+TOPIC="persistent://public/default/perf-test"
 COUNT=20000
-OUTPUT_FILE="/opt/project/results/producer_pulsar_custom.txt"
 
-# Caminho do cliente Pulsar
-PULSAR_CLIENT="bin/pulsar-client"
-
-# Cria arquivo de saída
-mkdir -p /opt/project/results
-echo "Sending $COUNT messages to Pulsar topic '$TOPIC'..." > "$OUTPUT_FILE"
+OUTPUT_FILE="/opt/project/results/producer_pulsar_perf.txt"
+mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 start_time=$(date +%s)
 
-# Loop de envio
-for i in $(seq 1 $COUNT); do
-    $PULSAR_CLIENT produce "$TOPIC" \
-        -m "$(cat $MESSAGE_FILE)" \
-        -n 1 \
-        -s "$BROKER_URL" \
-        >> "$OUTPUT_FILE" 2>&1
-done
+$PULSAR_PERF produce \
+  -m "$COUNT" \
+  -r 0 \
+  -s 1024 \
+  "$TOPIC" \
+  > "$OUTPUT_FILE" 2>&1
 
 end_time=$(date +%s)
 elapsed=$((end_time - start_time))

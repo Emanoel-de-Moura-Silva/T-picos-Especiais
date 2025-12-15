@@ -1,0 +1,134 @@
+2025-12-15T13:55:05,358+0000 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - JVM args [-Dlog4j.configurationFile=log4j2.yaml, -Djava.net.preferIPv4Stack=true, --add-opens=java.base/sun.net=ALL-UNNAMED, --add-opens=java.base/java.lang=ALL-UNNAMED, -Dpulsar.allocator.exit_on_oom=true, -Dio.netty.recycler.maxCapacityPerThread=4096, -Dpulsar.log.appender=Console, -Dpulsar.log.level=info, -Dpulsar.log.root.level=info, -Dpulsar.log.immediateFlush=false, -Dpulsar.log.dir=/pulsar/logs, -Dpulsar.log.file=pulsar-perftest.log]
+2025-12-15T13:55:05,395+0000 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Netty max memory (PlatformDependent.maxDirectMemory()) 1 GB
+2025-12-15T13:55:05,396+0000 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - JVM max heap memory (Runtime.getRuntime().maxMemory()) 1 GB
+2025-12-15T13:55:05,486+0000 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
+  "confFile" : "/pulsar/conf/client.conf",
+  "serviceURL" : "pulsar://localhost:6650/",
+  "authPluginClassName" : "",
+  "authParams" : "",
+  "tlsTrustCertsFilePath" : "",
+  "tlsAllowInsecureConnection" : false,
+  "tlsHostnameVerificationEnable" : false,
+  "maxConnections" : 1,
+  "statsIntervalSeconds" : 0,
+  "ioThreads" : 1,
+  "enableBusyWait" : false,
+  "listenerName" : null,
+  "listenerThreads" : 1,
+  "maxLookupRequest" : 50000,
+  "deprecatedAuthPluginClassName" : null,
+  "memoryLimit" : 0,
+  "topics" : [ "persistent://public/default/perf-test" ],
+  "numTopics" : 1,
+  "numTestThreads" : 1,
+  "msgRate" : 0,
+  "msgSize" : 1024,
+  "numProducers" : 1,
+  "separator" : "-",
+  "sendTimeout" : 0,
+  "producerName" : null,
+  "adminURL" : "http://localhost:8080/",
+  "maxOutstanding" : 0,
+  "maxPendingMessagesAcrossPartitions" : 0,
+  "partitions" : null,
+  "numMessages" : 20000,
+  "compression" : "NONE",
+  "payloadFilename" : null,
+  "payloadDelimiter" : "\\n",
+  "batchTimeMillis" : 1.0,
+  "disableBatching" : false,
+  "batchMaxMessages" : 1000,
+  "batchMaxBytes" : 4194304,
+  "testTime" : 0,
+  "warmupTimeSeconds" : 1.0,
+  "encKeyName" : null,
+  "encKeyFile" : null,
+  "delay" : 0,
+  "delayRange" : null,
+  "setEventTime" : false,
+  "exitOnFailure" : false,
+  "messageKeyGenerationMode" : null,
+  "producerAccessMode" : "Shared",
+  "formatPayload" : false,
+  "formatterClass" : "org.apache.pulsar.testclient.DefaultMessageFormatter",
+  "transactionTimeout" : 10,
+  "numMessagesPerTransaction" : 50,
+  "isEnableTransaction" : false,
+  "isAbortTransaction" : false,
+  "histogramFile" : null
+}
+2025-12-15T13:55:05,493+0000 [pulsar-perf-producer-exec-1-1] INFO  org.apache.pulsar.testclient.PerformanceProducer - Started performance test thread 0
+2025-12-15T13:55:05,763+0000 [pulsar-perf-producer-exec-1-1] INFO  org.apache.pulsar.testclient.PerformanceProducer - Adding 1 publishers on topic persistent://public/default/perf-test
+2025-12-15T13:55:05,841+0000 [pulsar-client-io-2-1] INFO  org.apache.pulsar.client.impl.ConnectionPool - [[id: 0x5d196d30, L:/127.0.0.1:39580 - R:localhost/127.0.0.1:6650]] Connected to server
+2025-12-15T13:55:05,948+0000 [pulsar-client-io-2-1] WARN  org.apache.pulsar.client.impl.BinaryProtoLookupService - [persistent://public/default/perf-test] failed to get Partitioned metadata : {"errorMsg":"Namespace not found","reqId":4477740924959530549, "remote":"localhost/127.0.0.1:6650", "local":"/127.0.0.1:39580"}
+org.apache.pulsar.client.api.PulsarClientException$TopicDoesNotExistException: {"errorMsg":"Namespace not found","reqId":4477740924959530549, "remote":"localhost/127.0.0.1:6650", "local":"/127.0.0.1:39580"}
+	at org.apache.pulsar.client.impl.ClientCnx.getPulsarClientException(ClientCnx.java:1338) ~[org.apache.pulsar-pulsar-client-original-3.2.0.jar:3.2.0]
+	at org.apache.pulsar.client.impl.ClientCnx.handlePartitionResponse(ClientCnx.java:663) ~[org.apache.pulsar-pulsar-client-original-3.2.0.jar:3.2.0]
+	at org.apache.pulsar.common.protocol.PulsarDecoder.channelRead(PulsarDecoder.java:144) ~[org.apache.pulsar-pulsar-common-3.2.0.jar:3.2.0]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) ~[io.netty-netty-codec-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) ~[io.netty-netty-codec-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.flush.FlushConsolidationHandler.channelRead(FlushConsolidationHandler.java:152) ~[io.netty-netty-handler-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:800) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:509) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:407) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+2025-12-15T13:55:05,963+0000 [pulsar-client-io-2-1] WARN  org.apache.pulsar.client.impl.PulsarClientImpl - [persistent://public/default/perf-test] Failed to get partitioned topic metadata: org.apache.pulsar.client.api.PulsarClientException$TopicDoesNotExistException: {"errorMsg":"Namespace not found","reqId":4477740924959530549, "remote":"localhost/127.0.0.1:6650", "local":"/127.0.0.1:39580"}
+2025-12-15T13:55:05,964+0000 [pulsar-perf-producer-exec-1-1] ERROR org.apache.pulsar.testclient.PerformanceProducer - Got error
+java.util.concurrent.ExecutionException: org.apache.pulsar.client.api.PulsarClientException$TopicDoesNotExistException: {"errorMsg":"Namespace not found","reqId":4477740924959530549, "remote":"localhost/127.0.0.1:6650", "local":"/127.0.0.1:39580"}
+	at java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396) ~[?:?]
+	at java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2073) ~[?:?]
+	at org.apache.pulsar.testclient.PerformanceProducer.runProducer(PerformanceProducer.java:551) ~[org.apache.pulsar-pulsar-testclient-3.2.0.jar:3.2.0]
+	at org.apache.pulsar.testclient.PerformanceProducer.lambda$main$1(PerformanceProducer.java:351) ~[org.apache.pulsar-pulsar-testclient-3.2.0.jar:3.2.0]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[?:?]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[?:?]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[?:?]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+Caused by: org.apache.pulsar.client.api.PulsarClientException$TopicDoesNotExistException: {"errorMsg":"Namespace not found","reqId":4477740924959530549, "remote":"localhost/127.0.0.1:6650", "local":"/127.0.0.1:39580"}
+	at org.apache.pulsar.client.impl.ClientCnx.getPulsarClientException(ClientCnx.java:1338) ~[org.apache.pulsar-pulsar-client-original-3.2.0.jar:3.2.0]
+	at org.apache.pulsar.client.impl.ClientCnx.handlePartitionResponse(ClientCnx.java:663) ~[org.apache.pulsar-pulsar-client-original-3.2.0.jar:3.2.0]
+	at org.apache.pulsar.common.protocol.PulsarDecoder.channelRead(PulsarDecoder.java:144) ~[org.apache.pulsar-pulsar-common-3.2.0.jar:3.2.0]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346) ~[io.netty-netty-codec-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:318) ~[io.netty-netty-codec-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.handler.flush.FlushConsolidationHandler.channelRead(FlushConsolidationHandler.java:152) ~[io.netty-netty-handler-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[io.netty-netty-transport-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:800) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:509) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:407) ~[io.netty-netty-transport-classes-epoll-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[io.netty-netty-common-4.1.104.Final.jar:4.1.104.Final]
+	... 2 more
+2025-12-15T13:55:05,965+0000 [pulsar-perf-producer-exec-1-1] INFO  org.apache.pulsar.client.impl.PulsarClientImpl - Client closing. URL: pulsar://localhost:6650/
+2025-12-15T13:55:05,975+0000 [pulsar-client-io-2-1] INFO  org.apache.pulsar.client.impl.ClientCnx - [id: 0x5d196d30, L:/127.0.0.1:39580 ! R:localhost/127.0.0.1:6650] Disconnected
+2025-12-15T13:55:15,582+0000 [Thread-0] INFO  org.apache.pulsar.testclient.PerformanceProducer - Aggregated throughput stats --- 0 records sent --- 0.000 msg/s --- 0.000 Mbit/s 
+2025-12-15T13:55:15,627+0000 [Thread-0] INFO  org.apache.pulsar.testclient.PerformanceProducer - Aggregated latency stats --- Latency: mean:   0.000 ms - med:   0.000 - 95pct:   0.000 - 99pct:   0.000 - 99.9pct:   0.000 - 99.99pct:   0.000 - 99.999pct:   0.000 - Max:   0.000
+Sent 20000 messages in 12s
