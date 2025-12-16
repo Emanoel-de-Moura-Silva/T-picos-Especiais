@@ -1,27 +1,150 @@
--- Dar permissão de execução
+Segue um **README ajustado** (pronto para copiar/colar) com o seu fluxo de execução, mais organizado e com observações importantes.
+
+---
+
+# Benchmark de Producers: Kafka x Redpanda x Pulsar (Docker Compose)
+
+Este projeto sobe **Kafka**, **Redpanda** e **Pulsar** via Docker Compose e executa scripts de producer para publicar **20.000 mensagens**, registrando **tempo total** e logs em `results/`.
+
+## Estrutura do projeto
+
+- `docker-compose.yml` → Kafka
+- `docker-compose-redpanda.yml` → Redpanda
+- `docker-compose-pulsar.yml` → Pulsar
+- `scripts/` → scripts de benchmark (producers)
+- `data/` → payload de entrada (ex.: `message.json`)
+- `results/` → logs/resultados gerados pelos scripts
+
+## Pré-requisitos
+
+- Docker instalado e rodando
+- Docker Compose (via `docker compose`)
+- (Opcional) Python + `venv` se você tiver algum utilitário local (o benchmark em si roda dentro dos containers)
+
+Verificar se o Docker está OK:
+
+```bash
+docker ps
+```
+
+---
+
+## 1) Permissão de execução dos scripts
+
+No Linux/WSL, dê permissão para execução:
+
+```bash
 chmod +x scripts/kafka_producer_custom.sh
-
 chmod +x scripts/producer_redpanda_rpk.sh
-
 chmod +x scripts/producer_pulsar_rpk.sh
+```
 
+---
 
-# Ativar o Ambiente Virtual
--- source venv/bin/activate
+## 2) (Opcional) Ativar ambiente virtual
 
-# Rodar o Script
+Se você estiver usando um `venv` para outras rotinas locais, ative assim:
 
+```bash
+source venv/bin/activate
+```
+
+> Observação: para rodar os brokers e os producers via Docker, o `venv` **não é obrigatório**.
+
+---
+
+## 3) Execução dos benchmarks
+
+Recomendação: rode **um broker por vez** para evitar conflitos de portas e deixar o benchmark mais controlado.
+
+### 3.1 Kafka
+
+Subir Kafka:
+
+```bash
 docker compose -f docker-compose.yml up -d
+```
 
+Rodar o producer (dentro do container):
+
+```bash
 docker exec -it broker bash -c "/opt/project/scripts/kafka_producer_custom.sh"
+```
 
+---
+
+### 3.2 Redpanda
+
+Subir Redpanda:
+
+```bash
 docker compose -f docker-compose-redpanda.yml up -d
+```
 
+Rodar o producer:
+
+```bash
 docker exec -it redpanda bash -c "/opt/project/scripts/producer_redpanda_rpk.sh"
+```
 
+---
+
+### 3.3 Pulsar
+
+Subir Pulsar:
+
+```bash
 docker compose -f docker-compose-pulsar.yml up -d
+```
 
+Rodar o benchmark/producer:
+
+```bash
 docker exec -it pulsar sh -c "/opt/project/scripts/producer_pulsar_rpk.sh"
+```
 
+---
 
+## 4) Onde ver os resultados
 
+Os scripts geram logs e/ou resumo de tempo em:
+
+- `results/`
+
+Exemplo (listar resultados):
+
+```bash
+ls -lah results/
+```
+
+---
+
+## 5) Encerrar os ambientes (boa prática)
+
+Ao terminar cada teste (ou no final):
+
+```bash
+docker compose -f docker-compose.yml down
+docker compose -f docker-compose-redpanda.yml down
+docker compose -f docker-compose-pulsar.yml down
+```
+
+---
+
+## 6) Troubleshooting rápido
+
+Ver containers rodando:
+
+```bash
+docker ps
+```
+
+Ver logs (últimas linhas):
+
+```bash
+docker logs broker --tail 50
+docker logs redpanda --tail 50
+docker logs pulsar --tail 50
+```
+
+Se der erro de “tópico não existe” (depende da config do broker), crie o tópico conforme a ferramenta/stack que você estiver usando e rode novamente.
